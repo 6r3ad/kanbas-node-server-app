@@ -77,8 +77,8 @@ export default function WorkingWithArrays(app) {
         }
         todos.splice(todoIndex, 1);
         res.sendStatus(200);
-
     });
+    
     app.put("/lab5/todos/:id", (req, res) => {
         const { id } = req.params;
         const todoIndex = todos.findIndex((t) => t.id === parseInt(id));

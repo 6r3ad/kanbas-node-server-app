@@ -9,8 +9,7 @@ export default function CourseRoutes(app) {
         };
         const newModule = modulesDao.createModule(module);
         res.send(newModule);
-      });
-    
+      });    
     app.get("/api/courses", (req, res) => {
         const courses = dao.findAllCourses();
         res.send(courses);
