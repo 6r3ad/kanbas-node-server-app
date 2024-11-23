@@ -5,11 +5,11 @@ export function isEnrolled(userId, courseId) {
 }
 export function enrollUserInCourse(userId, courseId) {
   const { enrollments } = Database;
-  enrollments.push({ _id: enrollments.length + 1, user: userId, course: courseId });
+  Database.enrollments.push({ _id: enrollments.length + 1, user: userId, course: courseId });
 }
 export function unenrollUserInCourse(userId, courseId) {
     const { enrollments } = Database;
-    enrollments = enrollments.filter((e) => e.course === courseId && e.user === userId);
+    Database.enrollments = enrollments.filter((e) => e.course === courseId && e.user === userId);
     return enrollments;
 }
 export function getEnrollments(userId) {
