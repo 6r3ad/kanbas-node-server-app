@@ -5,8 +5,13 @@ export default function UserRoutes(app) {
   const createUser = (req, res) => { };
   const deleteUser = (req, res) => { };
   const findAllUsers = (req, res) => { };
-  const findUserById = (req, res) => { };
 
+  const findUserById = (req, res) => {
+    const userId = req.params.userId;
+    const currentUser = dao.findUserById(userId);
+    res.json(currentUser);
+  };
+  
   const updateUser = (req, res) => {
     const userId = req.params.userId;
     const userUpdates = req.body;
@@ -30,9 +35,10 @@ export default function UserRoutes(app) {
     const { username, password } = req.body;
     const currentUser = dao.findUserByCredentials(username, password);
     if (currentUser) {
-      req.session["currentUser"] = currentUser;
+      req.session.currentUser = currentUser;
       res.json(currentUser);
-    } else {
+    }
+    else {
       res.status(401).json({ message: "Unable to login. Try again later." });
     }
   };
@@ -40,8 +46,8 @@ export default function UserRoutes(app) {
     req.session.destroy();
     res.sendStatus(200);
   };
-  const profile = async (req, res) => {
-    const currentUser = req.session["currentUser"];
+  const profile = (req, res) => {
+    const currentUser = req.session.currentUser;
     if (!currentUser) {
       res.sendStatus(401);
       return;

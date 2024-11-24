@@ -19,6 +19,10 @@ const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kanbas",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        secure: false,
+        maxAge: 10000000,
+    }
 };
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;

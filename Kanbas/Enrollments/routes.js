@@ -6,15 +6,15 @@ export default function EnrollRoutes(app) {
         res.send(courses);
     });
 
+    app.get("/api/enroll/:userId/:courseId", (req, res) => {
+        const { userId, courseId } = req.params;
+        const isEnrolled = dao.isEnrolled(userId, courseId);
+        res.send(isEnrolled);
+    })
+
     app.put("/api/enroll/toggleEnroll/:userId/:courseId", (req, res) => {
         const { userId, courseId } = req.params;
-        const courses = dao.enrollUserInCourse(userId, courseId);
-        res.send(courses);
-    });
-
-    app.put("/api/enroll/toggleUnenroll/:userId/:courseId", (req, res) => {
-        const { userId, courseId } = req.params;
-        const courses = dao.unenrollUserInCourse(userId, courseId)
-        res.send(courses);
+        const courses = dao.toggleEnroll(userId, courseId);
+        return res.status(200).json(courses);
     });
 }
