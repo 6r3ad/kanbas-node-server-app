@@ -8,6 +8,9 @@ import EnrollRoutes from "./Kanbas/Enrollments/routes.js";
 import Hello from "./Hello.js"
 import Lab5 from "./Lab5/index.js";
 import cors from "cors";
+import mongoose from "mongoose";
+const CONNECTION_STRING = "mongodb://127.0.0.1:27017/kanbas"
+mongoose.connect(CONNECTION_STRING);
 const app = express()
 app.use(
     cors({
